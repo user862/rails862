@@ -1,0 +1,40 @@
+
+<div id="AlertDiv">
+	<h1>Задачи</h1>
+	<%= content_tag :div, class: "header", id: "new_todo" do -%>
+		<% link_to image_tag("image.png",size: "17x17"), "", id: "add_todo" %>
+	<% end -%>
+</div>
+
+<section class="AfterBox">
+<% @projects.each do |project| %>
+<%= content_tag :div, class: "InlineBox" do -%>
+  <div class="ProjectName">
+    <h2><%= project.title %></h2>
+  </div>
+  <ul>
+  <% project.todos.each do |todo| %>
+    <li><%= todo.text %></li>
+  <% end %>
+  </ul>
+<% end -%>
+<% end %>
+</section>
+
+<div class="todo_block">
+<div class="todo_form">
+<%= form_for :todo, url: { action: "create" }, local: true, :html => {:id => "todo_create_form"} do |form| %>
+  <h2>Новая задача</h2>
+  <p><%= form.text_field :text, placeholder: "Назовите задачу..."%></p>
+  <%= form.select :project_id, options_for_select(@projects.map{|p| [p.title,p.id] }), {}, {} %>
+
+  <p>
+  <%= link_to 'ОТМЕНА', "", id: 'hide_form'  %>  
+  <%= link_to 'OK', "", id: 'submit'  %>    
+  </p>
+<% end %>
+</div>
+</div>
+
+
+

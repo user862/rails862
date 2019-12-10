@@ -1,0 +1,77 @@
+
+h1 {
+	font: 20pt Rostelecom;
+}
+
+h2 {
+	font: 13pt Rostelecom-Bold;
+}
+
+#AlertDiv {
+	position: fixed;
+	height: 51px;
+	width: 100%;
+	top: 0px;
+	right: 0px;
+	background-color: #37b1db;
+	text-align:center;
+	color: white;
+}
+
+#AlertDiv h1{
+	margin:auto;
+	line-height:51px;
+	vertical-align:middle;
+}
+#AlertDiv div{
+	position: absolute;
+	top: 17px;
+	right: 17px;
+	max-height: 17px;
+	max-width: 17px;
+}
+
+
+.AfterBox {
+	margin-top: 51px;
+	padding: 20px;
+}
+
+.InlineBox {
+	margin: 20px;
+	padding: 10px;
+	display: inline-block;
+	vertical-align: top;
+	width: 500px;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+
+.ProjectName {
+	padding-left: 10px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.todo_block {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: auto;
+	background: rgba(0, 0, 0, 0.36);
+}
+
+.todo_form {
+	width: 380px;
+	height: 200px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	background: #60a839;
+}
+body  {
+  background: white;
+}
