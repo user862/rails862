@@ -6,13 +6,16 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
-require('jquery')
+//require('jquery')
+
+//
+//require('vendor/icheck-1.x/icheck')
+//require('select2')
+//require('select2/dist/css/select2.css')
+
 require("packs/custom")
-require("packs/custom-esp6")
-require('vendor/icheck-1.x/icheck')
 
-
-
+//require("packs/custom-esp6")
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
