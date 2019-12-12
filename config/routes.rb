@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'todos/index'
   post 'todos/create'
-  get 'todos/update'
+  post 'todos/update'
 
   root 'todos#index'
 

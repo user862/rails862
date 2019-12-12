@@ -1,10 +1,38 @@
+* {
+          box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+}
+
+.around-container{
+	margin-top: 60px;
+	padding: 10px;
+}
+.inside-box{
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+	margin: 10px;
+}
+.col-xl-4, .col-lg-4, .col-md-6, .col-sm-0, .col-0 {
+          box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+}
 
 h1 {
 	font: 20pt Rostelecom;
+	display: block;
 }
 
 h2 {
-	font: 13pt Rostelecom-Bold;
+	font: 10pt Rostelecom-Bold;
+}
+
+span{
+	font: 13pt PartnerCondensed;
+}
+
+ul {
+	list-style: none
 }
 
 #AlertDiv {
@@ -16,6 +44,7 @@ h2 {
 	background-color: #37b1db;
 	text-align:center;
 	color: white;
+
 }
 
 #AlertDiv h1{
@@ -48,18 +77,47 @@ h2 {
 
 .ProjectName {
 	padding-left: 10px;
+	height: 40px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+.ProjectName h2{
+	line-height:40px;
+	vertical-align:middle;
+}
+.ProjectTodos {
+	margin-left: -22px;
+	margin-right: 10px;
+	
+	padding-top: -10px;
+	padding-bottom: 1px;
+
+}
+
+ul {}
+
+li {
+	
+	margin:10px 0 ;
+	margin-right: 10px;
+	margin-bottom: 10px;
+
+}
+
+.icheckbox_square-blue, .'icheckbox_square-blue checked'{
+	margin-left:10px;
+}
 .todo_block {
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	overflow: auto;
 	background: rgba(0, 0, 0, 0.36);
+	display: none;
 }
+
 
 .todo_form {
 	width: 380px;
@@ -70,8 +128,74 @@ h2 {
 	bottom: 0;
 	left: 0;
 	margin: auto;
-	background: #60a839;
+	background: white;
+	padding: 10px;
 }
-body  {
-  background: white;
+#todo_text{
+	position: absolute;
+	width:360px;
+	left: 10px;
+	bottom: 110px;
+	height: 40px;
+	border-radius: 0 !important;
 }
+.select-div{
+	position: absolute !important;
+	left: 10px !important;
+	bottom: 60px !important;
+	width:360px;
+}
+
+.todo_form h2{
+	text-align: center;
+}
+.todo_form p{
+	width:20px;
+}
+#hide_form {
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	width: 175px;
+	text-align:center;
+	font: 13pt PartnerCondensed;
+	text-decoration: none;
+	background-color: #a0a0a0;
+	padding: 10px 0;
+	color: white;
+	font: 10pt Rostelecom;
+}
+#submit {
+	position: absolute;
+	left: 195px;
+	bottom: 10px;
+	width: 175px;
+	text-align:center;
+	font: 13pt PartnerCondensed;
+	text-decoration: none;
+	background-color: #37b1db;
+	padding: 10px 0;
+	color: white;
+	font: 10pt Rostelecom;
+}
+
+    .select2-selection, .select2-selection__rendered, .select2-selection__arrow {
+
+       height: 40px !important;
+
+       span {
+
+           line-height: 40px !important;
+
+           text-align: left;
+
+       }
+
+    }
+
+    .select2-selection {
+
+       border-radius: 0 !important;
+
+    }
+

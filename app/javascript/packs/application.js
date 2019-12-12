@@ -8,9 +8,9 @@ require("@rails/activestorage").start()
 require("channels")
 require('jquery')
 require("packs/custom")
+require("packs/custom-esp6")
+require('vendor/icheck-1.x/icheck')
 
-//import your_link from './custom'
-//window.your_link = your_link
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
