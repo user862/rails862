@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix">
+
+    <androidx.appcompat.widget.Toolbar android:id="@+id/tvTitle1"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        style="@style/Toolbar">
+       <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tasks"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title"
+           fontPath="fonts/opensanscondensedbold.ttf"
+           style="@style/ToolbarTitle"/>
+    </androidx.appcompat.widget.Toolbar>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:gravity="top">
+
+
+
+
+
+<!--<TextView
+   fontPath="fonts/OpenSans-Light.ttf"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:text="Hello World!"
+   android:textSize="40dp"
+   app:layout_constraintBottom_toBottomOf="parent"
+   app:layout_constraintLeft_toLeftOf="parent"
+   app:layout_constraintRight_toRightOf="parent"
+   app:layout_constraintTop_toTopOf="parent"
+   tools:ignore="MissingPrefix" />-->
+
+    <ListView
+       android:id="@+id/mylist"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- <androidx.appcompat.widget.AppCompatCheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:app="http://schemas.android.com/apk/res-auto"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+
+         android:id="@+id/checkbox"
+     />-->
+
+      <com.scalified.fab.ActionButton
+          android:id="@+id/action_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentRight="true"
+          android:layout_marginRight="@dimen/fab_margin"
+          android:layout_marginBottom="@dimen/fab_margin"
+          />
+       <!-- <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Go to Activity Two"
+          android:id="@+id/btnActTwo">
+      </Button>-->
+
+</RelativeLayout>
+</LinearLayout>

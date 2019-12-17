@@ -1,0 +1,6 @@
+framework module Pods_task5_task5UITests {
+  umbrella header "Pods-task5-task5UITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

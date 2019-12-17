@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Задачи</string>
+    <string name="title_activity_new_todo">NewTodoActivity</string>
+    <string name="hint">  Введите новую задачу &#8230;</string>
+    <string name="tasks">Задачи</string>
+    <string name="new_task">Новая задача</string>
+    <string name="projects">Категории</string>
+    <string-array name="names">
+        <item>Иван</item>
+        <item>Марья</item>
+        <item>Петр</item>
+        <item>Антон</item>
+        <item>Даша</item>
+        <item>Борис</item>
+        <item>Костя</item>
+        <item>Игорь</item>
+        <item>Анна</item>
+        <item>Денис</item>
+        <item>Вадим</item>
+        <item>Ольга</item>
+        <item>Сергей</item>
+    </string-array>
+</resources>
