@@ -7,22 +7,29 @@
 //
 
 import UIKit
+import Alamofire
 
 class NewTodoController: UITableViewController {
     
     @IBOutlet weak var addTodoButtonOutlet: UIBarButtonItem!
+    
     @IBAction func addTodoButton(_ sender: Any) {
         let textEditIndexPath : IndexPath = IndexPath(row: 0, section: 0)
         let textEditcell: TextEditCell = tableView.cellForRow(at: textEditIndexPath) as! TextEditCell
         let text = textEditcell.textEdit.text
-        if text != "" && selectedCell != nil {
-            /*
-             
-            send
- 
-            */
-            navigationController?.popViewController(animated: true)
-            dismiss(animated: true, completion: nil)
+        if text != "" && selectedCellInd != nil {
+            // sending
+            let parameters: [String: AnyObject] = ["project_id": projectsNames[selectedCellInd!.row].id as AnyObject,"text": text! as AnyObject]
+            Alamofire.request(url+create, method: .post,parameters: parameters, encoding: JSONEncoding.default)
+                .responseJSON{ response in
+                    switch response.result {
+                    default:
+                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true, completion: nil)
+                        break
+                    }
+            }
+            
         }
     }
     
@@ -35,7 +42,10 @@ class NewTodoController: UITableViewController {
     }
     
     var projectsNames: [(id: Int,title: String)] = [(title: "",id: 0)]
-    var selectedCell: TodoCell?
+    var selectedCellInd: IndexPath?
+    let url: String = "http://polar-fortress-89756.herokuapp.com/"
+    let create = "todos/create"
+    let url2 = "https://enp3dcgjtpdnq.x.pipedream.net"
     
     
     
@@ -47,6 +57,11 @@ class NewTodoController: UITableViewController {
         self.navigationController?.navigationBar.barTintColor  = UIColor(hex: "#3aafdaff");
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -68,11 +83,15 @@ class NewTodoController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "todoTextEdit") as! TextEditCell
+            
             cell.textEdit.attributedPlaceholder = NSAttributedString(string: "Введите свою задачу...", attributes: [NSAttributedString.Key.foregroundColor: UIColor(hex: "#aabobcff")])
             
             return cell
         }
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "projectCell") as! TodoCell
+        cell.actionBlock = {
+            self.changePickedProject(indexPath: indexPath)
+        }
         cell.textTodo.text = projectsNames[indexPath.row].title
         cell.todoCheckbox.setOn(false, animated: true)
         cell.todoCheckbox.boxType = .square
@@ -84,16 +103,19 @@ class NewTodoController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {return;}
-        let cell: TodoCell = tableView.cellForRow(at: indexPath) as! TodoCell
-        if cell != selectedCell {
+    func changePickedProject(indexPath: IndexPath){
+        if indexPath.section == 1 && indexPath != selectedCellInd {
+            let cell: TodoCell = tableView.cellForRow(at: indexPath) as! TodoCell
             cell.todoCheckbox.on = true
-            if selectedCell != nil {
-                selectedCell?.todoCheckbox.on = false
+            if selectedCellInd != nil {
+                (tableView.cellForRow(at: selectedCellInd!) as! TodoCell).todoCheckbox.on = false
             }
-            selectedCell = cell
+            selectedCellInd = indexPath
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        changePickedProject(indexPath: indexPath)
     }
     
     

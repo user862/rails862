@@ -7,19 +7,37 @@
 //
 
 import UIKit
+import Alamofire
+
+
 
 class TodosController: UITableViewController {
+    
     @IBOutlet weak var newTodoOutlet: UIBarButtonItem!
     
-    var projects = [(id: 0,title:"Семья",todos: [(id: 0, text: "Купить сыр", isCompleted: false),(id: 1, text: "Купить молоко Купить молоко Купить молоко Купить молоко Купить молоко Купить молоко Купить молоко ", isCompleted: false),(id: 2, text: "Забрать обувь", isCompleted: true)]),(id: 1,title:"Работа",todos: [(id: 3, text: "Написать отчет", isCompleted: true),(id: 4, text: "Пойти на встречу", isCompleted: false)])]
-    
-    
+    let url: String = "http://polar-fortress-89756.herokuapp.com/"
+    let update = "todos/update"
+    let headers: HTTPHeaders = [
+        "content-type": "application/json; charset=utf-8",
+        "accept": "application/json"
+    ]
+    var projects: [Project] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         newTodoOutlet.tintColor = UIColor.white
         //self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
-        self.navigationController?.navigationBar.barTintColor  = UIColor(hex: "#3aafdaff");
+        self.navigationController?.navigationBar.barTintColor  = UIColor(hex: "#3aafdaff")
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        Alamofire.request(url, headers: headers).responseCollection { (response: DataResponse<[Project]>) in
+            if let projects1 = response.result.value {
+                self.projects = projects1
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,6 +53,7 @@ class TodosController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        
         let projectTitle = UITableViewHeaderFooterView()
         projectTitle.textLabel?.text = projects[section].title
         projectTitle.textLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
@@ -46,9 +65,34 @@ class TodosController: UITableViewController {
      return projects[section].todos.count
      
      }
+    
+    func changeTodoStatus(indexPath: IndexPath){
+        let cell: TodoCell = tableView.cellForRow(at: indexPath) as! TodoCell
+        let url2 = "https://enp3dcgjtpdnq.x.pipedream.net"
+        let parameters: [String: AnyObject] = ["id":projects[indexPath.section].todos[indexPath.row].id as AnyObject]
+        Alamofire.request(url+update, method: .post,parameters: parameters, encoding: JSONEncoding.default)
+        
+        let status: Bool = projects[indexPath.section].todos[indexPath.row].isCompleted
+        projects[indexPath.section].todos[indexPath.row].isCompleted = !status
+        let attr: NSMutableAttributedString =  NSMutableAttributedString(string: projects[indexPath.section].todos[indexPath.row].text)
+        if(status){
+            //to-uncheck
+            attr.removeAttribute(NSAttributedString.Key.strikethroughStyle, range:NSMakeRange(0, attr.length))
+        } else {
+            //to-check
+            attr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attr.length))
+            
+        }
+        cell.textTodo.attributedText = attr
+        cell.todoCheckbox.setOn(!status, animated: true)
+        
+    }
      
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      let cell = self.tableView.dequeueReusableCell(withIdentifier: "tCell") as! TodoCell
+        cell.actionBlock = {
+            self.changeTodoStatus(indexPath: indexPath)
+        }
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: projects[indexPath.section].todos[indexPath.row].text)
         let status = projects[indexPath.section].todos[indexPath.row].isCompleted
         if status {
@@ -66,27 +110,7 @@ class TodosController: UITableViewController {
      }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell: TodoCell = tableView.cellForRow(at: indexPath) as! TodoCell
-        /*
-         
-        send
-         
-        */
-        let status: Bool = projects[indexPath.section].todos[indexPath.row].isCompleted
-        projects[indexPath.section].todos[indexPath.row].isCompleted = !status
-        let attr: NSMutableAttributedString =  NSMutableAttributedString(string: projects[indexPath.section].todos[indexPath.row].text)
-        if(status){
-            //to-uncheck
-            attr.removeAttribute(NSAttributedString.Key.strikethroughStyle, range:NSMakeRange(0, attr.length))
-        } else {
-           //to-check
-            attr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attr.length))
-            
-        }
-        cell.textTodo.attributedText = attr
-        cell.todoCheckbox.setOn(!status, animated: true)
-        
-        
+        changeTodoStatus(indexPath: indexPath)
     }
     
     

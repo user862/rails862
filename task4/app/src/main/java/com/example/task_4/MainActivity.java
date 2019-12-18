@@ -53,13 +53,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
-    @Override
+    /*@Override
     public void onResume()
     {  // After a pause OR at startup
         super.onResume();
         startActivity(getIntent());
         //Refresh your stuff here
-    }
+    }*/
+
+
 
     List<Project> projects;
 void getProjects(Context cnt){
@@ -88,7 +90,7 @@ void getProjects(Context cnt){
 
 
                     } else {
-                        Toast toast = Toast.makeText(cnt," fail",Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(cnt,"no connection",Toast.LENGTH_LONG);
                         toast.show();
                     }
 
@@ -96,6 +98,18 @@ void getProjects(Context cnt){
 
             });
 }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String strEditText = data.getStringExtra("key");
+                Toast toast = Toast.makeText(this,"check",Toast.LENGTH_LONG);
+                toast.show();
+                getProjects(this);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +155,7 @@ void getProjects(Context cnt){
                 }
                 b.putSerializable("key",projectsInfo);
                 intent.putExtras(b);
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 break;
             default:
                 break;

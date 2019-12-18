@@ -35,9 +35,8 @@ public class NewTodoActivity extends AppCompatActivity implements View.OnClickLi
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.my_options_menu, menu);
         return true;
-
     }
-    
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -60,7 +59,10 @@ public class NewTodoActivity extends AppCompatActivity implements View.OnClickLi
                             .setCallback(new FutureCallback<JsonObject>() {
                                 @Override
                                 public void onCompleted(Exception e, JsonObject result) {
-
+                                    Intent intent = new Intent();
+                                    intent.putExtra("key", "value");
+                                    setResult(RESULT_OK, intent);
+                                    finish();
                                 }
                             });
                     Intent returnIntent = new Intent(this, MainActivity.class);

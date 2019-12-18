@@ -21,6 +21,9 @@
 		CEEBE9B023A7EF5600322AF1 /* NewTodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE9AF23A7EF5600322AF1 /* NewTodoController.swift */; };
 		CEEBE9B223A82E7500322AF1 /* TextEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE9B123A82E7500322AF1 /* TextEditCell.swift */; };
 		CEEBE9BA23A8E50E00322AF1 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE9B923A8E50E00322AF1 /* UIImageExt.swift */; };
+		CEEFD92323AA38A10021ADD1 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFD92223AA38A10021ADD1 /* Project.swift */; };
+		CEEFD92923AA41D00021ADD1 /* ResponseCollectionSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFD92823AA41D00021ADD1 /* ResponseCollectionSerializable.swift */; };
+		CEEFD92B23AA58D80021ADD1 /* ResponseObjectSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFD92A23AA58D80021ADD1 /* ResponseObjectSerializable.swift */; };
 		E8542256F99E4554B78C4C99 /* Pods_task5Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D32868DE6CEC9671F2C9A0 /* Pods_task5Tests.framework */; };
 		F402EAB481A96902A4B1C982 /* Pods_task5_task5UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CA4E1919CD489300ABD0CD /* Pods_task5_task5UITests.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +73,9 @@
 		CEEBE9AF23A7EF5600322AF1 /* NewTodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTodoController.swift; sourceTree = "<group>"; };
 		CEEBE9B123A82E7500322AF1 /* TextEditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditCell.swift; sourceTree = "<group>"; };
 		CEEBE9B923A8E50E00322AF1 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
+		CEEFD92223AA38A10021ADD1 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		CEEFD92823AA41D00021ADD1 /* ResponseCollectionSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCollectionSerializable.swift; sourceTree = "<group>"; };
+		CEEFD92A23AA58D80021ADD1 /* ResponseObjectSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseObjectSerializable.swift; sourceTree = "<group>"; };
 		E20611BD856F7177371A246C /* Pods-task5Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-task5Tests.release.xcconfig"; path = "Target Support Files/Pods-task5Tests/Pods-task5Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +143,9 @@
 				CE0511C223A703AE003CB062 /* Info.plist */,
 				CE0511E623A7159A003CB062 /* DismissSegue.swift */,
 				CE3C437023A7C84200322ED7 /* Extensions */,
+				CEEFD92223AA38A10021ADD1 /* Project.swift */,
+				CEEFD92823AA41D00021ADD1 /* ResponseCollectionSerializable.swift */,
+				CEEFD92A23AA58D80021ADD1 /* ResponseObjectSerializable.swift */,
 			);
 			path = task5;
 			sourceTree = "<group>";
@@ -438,6 +447,9 @@
 				CEEBE9BA23A8E50E00322AF1 /* UIImageExt.swift in Sources */,
 				CEEBE9B023A7EF5600322AF1 /* NewTodoController.swift in Sources */,
 				CE0511E523A70551003CB062 /* TodosController.swift in Sources */,
+				CEEFD92923AA41D00021ADD1 /* ResponseCollectionSerializable.swift in Sources */,
+				CEEFD92323AA38A10021ADD1 /* Project.swift in Sources */,
+				CEEFD92B23AA58D80021ADD1 /* ResponseObjectSerializable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

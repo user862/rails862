@@ -17,6 +17,8 @@ class TodoCell: UITableViewCell, BEMCheckBoxDelegate {
         super.awakeFromNib()
         todoCheckbox.delegate = self
     }
+    
+    var actionBlock: (() -> Void)? = nil
 
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,10 +26,11 @@ class TodoCell: UITableViewCell, BEMCheckBoxDelegate {
     }
     
     func didTap(_ checkbox: BEMCheckBox){
-        if checkbox.on {
+        actionBlock?()
+        /*if checkbox.on {
             checkbox.setOn(false, animated: false)
         } else {
             checkbox.setOn(true, animated: false)
-        }
+        }*/
     }
 }

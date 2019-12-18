@@ -5,9 +5,9 @@
     <string name="tasks">Задачи</string>
     <string name="new_task">Новая задача</string>
     <string name="projects">Категории</string>
-    <string name="kIndexRequest">http://fierce-brushlands-41998.herokuapp.com/</string>
-    <string name="kIndexRequestUpdate">http://fierce-brushlands-41998.herokuapp.com/todos/update</string>
-    <string name="kIndexRequestCreate">http://fierce-brushlands-41998.herokuapp.com/todos/create</string>
+    <string name="kIndexRequest">http://polar-fortress-89756.herokuapp.com/</string>
+    <string name="kIndexRequestUpdate">http://polar-fortress-89756.herokuapp.com/todos/update</string>
+    <string name="kIndexRequestCreate">http://polar-fortress-89756.herokuapp.com/todos/create</string>
     <string name="update">todos/update</string>
     <string name="create">todos/create</string>
     <string-array name="names">
