@@ -21,10 +21,14 @@ class TodosController < ApplicationController
   end
 
   def create
-        @project = Project.find(params[:todo][:project_id])
-        @todo = @project.todos.create(todo_params)
+        todoParams = params[:todo]
+        @project = Project.find(todoParams[:project_id])
+	#@todo = @project.todos.create(todo_params)
+        todoParams = params[:todo]
+        @todo = @project.todos.create(project_id: todoParams[:project_id], text: todoParams[:text], isCompleted: false)
         redirect_to root_path
   end
+
 
   def update
     @todo = Todo.find(todo_id_param[:id])
