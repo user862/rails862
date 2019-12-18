@@ -1,6 +1,7 @@
 package com.example.task_4;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
@@ -32,6 +37,8 @@ public class NewTodoActivity extends AppCompatActivity implements View.OnClickLi
         return true;
 
     }
+    
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.close:
@@ -40,17 +47,28 @@ public class NewTodoActivity extends AppCompatActivity implements View.OnClickLi
                 EditText edite_Text = (EditText) findViewById(R.id.newTodeText);
                 String newTodeText = edite_Text.getText().toString();
                 if(pr_list.getCheckedItemPosition()!=-1 && !newTodeText.isEmpty()){
-                    /*
+                    int projectId = Integer.parseInt(projectsInfo[pr_list.getCheckedItemPosition()][0]);
 
+                    JsonObject json = new JsonObject();
+                    json.addProperty("project_id", projectId);
+                    json.addProperty("text", newTodeText);
 
-                    send
+                    Ion.with(this)
+                            .load(getString(R.string.kIndexRequestCreate))
+                            .setJsonObjectBody(json)
+                            .asJsonObject()
+                            .setCallback(new FutureCallback<JsonObject>() {
+                                @Override
+                                public void onCompleted(Exception e, JsonObject result) {
 
-                     */
-                    Toast toast = Toast.makeText(this,"projectId: "+projectsInfo[pr_list.getCheckedItemPosition()][0]+" text: "+newTodeText,Toast.LENGTH_LONG);
-                    toast.show();
+                                }
+                            });
+                    Intent returnIntent = new Intent(this, MainActivity.class);
+                    setResult(RESULT_CANCELED, returnIntent);
+                    finish();
+                    //Toast toast = Toast.makeText(this,"projectId: "+projectsInfo[pr_list.getCheckedItemPosition()][0]+" text: "+newTodeText,Toast.LENGTH_LONG);
+                    //toast.show();
                 }
-                Toast toast = Toast.makeText(this," Something's missing",Toast.LENGTH_LONG);
-                toast.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

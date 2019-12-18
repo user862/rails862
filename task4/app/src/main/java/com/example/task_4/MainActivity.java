@@ -29,6 +29,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.async.http.SimpleMiddleware;
 import com.koushikdutta.ion.Ion;
 import com.scalified.fab.ActionButton;
 
@@ -52,11 +53,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
+    @Override
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+        startActivity(getIntent());
+        //Refresh your stuff here
+    }
 
     List<Project> projects;
+void getProjects(Context cnt){
+    Ion.with(cnt)
+            .load(getString(R.string.kIndexRequest))
+            .setTimeout(60 * 60 * 1000)
+            .setHeader("content-type", "application/json; charset=utf-8")
+            .setHeader("accept", "application/json")
+            .asJsonArray()
+            .setCallback(new FutureCallback<JsonArray>() {
+
+                @Override
+                public void onCompleted(Exception e, JsonArray result) {
+                    Log.e("loggers","loggers : "+result);
+
+                    if (result != null) {
+                        projects = new ArrayList<Project>();
+                        for (final JsonElement projectJsonElement : result) {
+                            projects.add(new Gson().fromJson(projectJsonElement, Project.class));
+                        }
+                        ListView myList1 = (ListView) findViewById(R.id.mylist);
+                        CustomAdapter adapter1 = new CustomAdapter(cnt);
+                        adapter1.addProjects(projects,cnt);
+
+                        myList1.setAdapter(adapter1);
+
+
+                    } else {
+                        Toast toast = Toast.makeText(cnt," fail",Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+
+                }
+
+            });
+}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ViewPump.init(ViewPump.builder()
@@ -69,88 +112,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.tvTitle1);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
-        Gson gson = new Gson();
-        projects = new ArrayList<Project>();
-
-        /*
-
-        recieve
-
-
-        Ion.with(this)
-                .load(getString(R.string.kIndexRequest))
-                .asJsonArray()
-                .setCallback(new FutureCallback<JsonArray>() {
-
-                    @Override
-                    public void onCompleted(Exception e, JsonArray result) {
-                        if (result != null) {
-                            List<Project> projects = new ArrayList<Project>();
-                            for (final JsonElement projectJsonElement : result) {
-                                projects.add(new Gson().fromJson(projectJsonElement, Project.class));
-                            }
-
-                        }
-
-                    }
-
-                });
-
-        */
-
-
-        String json =
-                "[" +
-                        "		{" +
-                        "			\"id\": 1," +
-                        "			\"title\": \"Семья\"," +
-                        "			\"todos\": [{" +
-                        "					\"id\": 1," +
-                        "					\"text\": \"Купить молоко\"," +
-                        "					\"isCompleted\": false" +
-                        "				}," +
-                        "				{" +
-                        "					\"id\": 2," +
-                        "					\"text\": \"Забрать обувь\"," +
-                        "					\"isCompleted\": true" +
-                        "				}," +
-                        "				{" +
-                        "					\"id\": 3," +
-                        "					\"text\": \"Сходить в кино\"," +
-                        "					\"isCompleted\": false" +
-                        "				}" +
-                        "			]" +
-                        "		}," +
-                        "		{" +
-                        "			\"id\": 2," +
-                        "			\"title\": \"Работа\"," +
-                        "			\"todos\": [{" +
-                        "					\"id\": 4," +
-                        "					\"text\": \"Позвонить заказчику\"," +
-                        "					\"isCompleted\": true" +
-                        "				}," +
-                        "				{" +
-                        "					\"id\": 5," +
-                        "					\"text\": \"Уйти пораньше\"," +
-                        "					\"isCompleted\": false" +
-                        "				}" +
-                        "			]" +
-                        "		}" +
-                        "	]";
-
-
-        JsonParser jsonParser = new JsonParser();
-        JsonArray result = (JsonArray) jsonParser.parse(json);
-
-        for (final JsonElement projectJsonElement : result)
-            projects.add(new Gson().fromJson(projectJsonElement, Project.class));
-
-        CustomAdapter adapter1 = new CustomAdapter(this);
-        adapter1.addProjects(projects);
         ListView myList1 = (ListView) findViewById(R.id.mylist);
-        myList1.setAdapter(adapter1);
+
+        getProjects(this);
 
         ActionButton actionButton = (ActionButton) findViewById(R.id.action_button);
         actionButton.setImageResource(R.drawable.fab_plus_icon);

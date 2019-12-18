@@ -2,6 +2,7 @@ package com.example.task_4;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +43,10 @@ class CustomAdapter extends BaseAdapter {
     }
 
     ArrayList<Object> objs;
-
-    public void addProjects(List<Project> projects) {
+    Context cnt;
+    public void addProjects(List<Project> projects,Context cnt) {
         objs = new ArrayList<>();
+        this.cnt = cnt;
         for (Project project : projects) {
             objs.add((Object) project);
             sectionHeader.add(objs.size() - 1);
@@ -105,7 +111,7 @@ class CustomAdapter extends BaseAdapter {
         switch (rowType) {
             case TYPE_ITEM:
                 Todo todo = (Todo)objs.get(position);
-                Boolean status = todo.getStatus();
+                boolean status = todo.getStatus();
                 setStrikeText(holder.checkBox,status);
                 if(status) {
                     holder.checkBox.setChecked(true);
@@ -125,6 +131,19 @@ class CustomAdapter extends BaseAdapter {
                         send
 
                          */
+                        JsonObject json = new JsonObject();
+                        json.addProperty("id",todo.getId());
+                        Ion.with(cnt)
+                                .load(cnt.getString(R.string.kIndexRequestUpdate))
+                                .setJsonObjectBody(json)
+                                .asJsonObject()
+                                .setCallback(new FutureCallback<JsonObject>() {
+                                    @Override
+                                    public void onCompleted(Exception e, JsonObject result) {
+
+                                    }
+                                });
+
                         if (checkbox.isChecked()) {
                             todo.changeStatus();
                         }

@@ -7,15 +7,6 @@ public class Project {
     private String title;
     private List<Todo> todos;
 
-    /*public Project(int id,String title) {
-        this.id = id;
-        this.title = title;
-        //this.todos=todos;
-    }
-
-    public int getId(){
-        return id;
-    }*/
 
     public String getTitle(){
         return title;
