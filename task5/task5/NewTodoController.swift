@@ -54,6 +54,7 @@ class NewTodoController: UITableViewController {
         super.viewDidLoad()
         addTodoButtonOutlet.tintColor = UIColor.white
         dismissButtonOutlet.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
         self.navigationController?.navigationBar.barTintColor  = UIColor(hex: "#3aafdaff");
         // Do any additional setup after loading the view.
     }
