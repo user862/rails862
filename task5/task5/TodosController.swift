@@ -56,6 +56,9 @@ class TodosController: UITableViewController {
         
         let projectTitle = UITableViewHeaderFooterView()
         projectTitle.textLabel?.text = projects[section].title
+        projectTitle.tintColor = UIColor.white
+        projectTitle.backgroundView = UIView(frame: projectTitle.bounds)
+        projectTitle.backgroundView?.backgroundColor = UIColor.white
         projectTitle.textLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
         return projectTitle
     }

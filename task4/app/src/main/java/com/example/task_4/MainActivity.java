@@ -100,15 +100,15 @@ void getProjects(Context cnt){
 }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        getProjects(this);
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        /*if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 String strEditText = data.getStringExtra("key");
-                Toast toast = Toast.makeText(this,"check",Toast.LENGTH_LONG);
-                toast.show();
-                getProjects(this);
+                //Toast toast = Toast.makeText(this,"check",Toast.LENGTH_LONG);
+                //toast.show();
             }
-        }
+        }*/
     }
 
     @Override
