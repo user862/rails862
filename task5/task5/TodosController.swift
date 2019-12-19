@@ -26,7 +26,7 @@ class TodosController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         newTodoOutlet.tintColor = UIColor.white
-        //self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
         self.navigationController?.navigationBar.barTintColor  = UIColor(hex: "#3aafdaff")
         
     }
